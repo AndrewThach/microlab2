@@ -116,8 +116,8 @@ while True:
     #     head.direction = "down"
     # elif ......
     #
-    if ser.in_waiting > 0:
-        control_information = ser.readline().decode(errors='ignore').strip()
+    if ser.in_waiting > 0: # Checks if there is any data to read from the serial port. Reads if theres anything buffered
+        control_information = ser.readline().decode(errors='ignore').strip() # Reads data until a new line apepars. Converts Bytes into text. Strip ignores whitespaces, So it reads the byte, converts it into text then removes the white spaces and new line codes
 
         if control_information == 'U':
             go_up()
@@ -153,7 +153,7 @@ while True:
 
     # Check for a collision with the food
     if head.distance(food) < 20:
-        ser.write(b'E')
+        ser.write(b'E') # Sends Byte E to arduino
         # TODO: notes by Prof. Luo
         # you need to send a flag to Arduino indicating an apple is eaten
         # so that the Arduino will beep the buzzer
